@@ -1,9 +1,26 @@
 // import { func } from '@hapi/joi';
 import { Router } from 'express';
 
+var multer  = require('multer');
+
 import * as articleController from '../controllers/articles';
 // import * as userController from '../controllers/users';
 // import { findUser, userValidator } from '../validators/userValidator';
+
+
+let storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'uploads/images')
+    },
+    filename: function (req, file, cb) {
+        let fileName = file.originalname;
+        let splitted = fileName.split('.');
+
+      cb(null, file.fieldname + '-' + Date.now() + '.' + splitted[splitted.length-1]);
+    }
+  })
+   
+let upload = multer({ storage: storage })
 
 const router = Router();
 
@@ -20,10 +37,13 @@ router.get('/', articleController.fetchAll);
  */
 router.get('/:id', articleController.fetchById);
 
-// /**
-//  * POST /api/users
-//  */
-// router.post('/', todoController.create);
+/**
+ * POST /api/users
+ */
+router.post('/',upload.single('image'), function(req, res, next) {
+    console.log(req.body);
+    res.json({msg: "c"});
+});
 
 // /**
 //  * PUT /api/users/:id
