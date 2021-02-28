@@ -47,6 +47,8 @@ app.use(bodyParser.json());
 app.use(errorHandler.bodyParser);
 app.use(json);
 
+app.use(express.static('uploads'));
+
 // API Routes
 app.use('/api', routes);
 
