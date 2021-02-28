@@ -111,19 +111,22 @@ export function fetchArticle(req, res, next) {
 }
 
 
-// /**
-//  * Create a new todo.
-//  *
-//  * @param {Object} req
-//  * @param {Object} res
-//  * @param {Function} next
-//  */
-// export function createTodo(req, res, next) {
-//   userService
-//     .createTodo(req.body.id,req.body)
-//     .then((data) => res.status(HttpStatus.CREATED).json({ data }))
-//     .catch((err) => next(err));
-// }
+/**
+ * Create a new article.
+ *
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ */
+export function createArticle(req, res, next) {
+  req.body.image = req.file.filename;
+  console.log(req.user.id);
+  // res.json({msg:"test"});
+  userService
+    .createArticle(req.user.id,req.body)
+    .then((data) => res.status(HttpStatus.CREATED).json({ data }))
+    .catch((err) => next(err));
+}
 
 // /**
 //  * Update a todo.

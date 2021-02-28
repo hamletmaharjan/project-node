@@ -111,15 +111,18 @@ export function getArticle(userId, articleId) {
     });
 }
 
-// /**
-//  * Create new todo.
-//  *
-//  * @param   {Object}  todo
-//  * @returns {Promise}
-//  */
-// export function createTodo(userId, todo) {
-//   return new Todo({ title: todo.title, user_id: userId, completed: todo.completed }).save();
-// }
+/**
+ * @param  {Number|String} userId
+ * @param  {Object} article
+ */
+export function createArticle(userId, article) {
+  return new Article({ 
+    title: article.title,
+    user_id: userId,
+    description: article.description,
+    image: article.image
+  }).save();
+}
 
 
 

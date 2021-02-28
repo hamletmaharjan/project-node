@@ -11,8 +11,13 @@ export function verifyToken(req, res, next) {
   // res.json(req.headers);
   if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
   jwt.verify(token, 'shh', function (err, decoded) {
-    req.body.role = decoded.role;
-    req.body.id = decoded.id;
+    let info = {
+        id: decoded.id,
+        role: decoded.role
+    }
+    req.user = info;
+    // req.body.role = decoded.role;
+    // req.body.id = decoded.id;
     if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
     next();
   });
@@ -23,7 +28,7 @@ export function verifyToken(req, res, next) {
  * @param  {Function} next
  */
 export function verifyAdmin(req, res, next) {
-  if (req.body.role === 'admin') {
+  if (req.user.role === 'admin') {
     next();
   } else {
     res.json({ message: 'not authorized' });
@@ -36,7 +41,7 @@ export function verifyAdmin(req, res, next) {
  * @param  {Function} next
  */
 export function verifyUser(req, res, next) {
-  if (req.body.id == req.params.id) {
+  if (req.user.id == req.params.id) {
     next();
   } else {
     res.json({ message: 'not authorized' });
