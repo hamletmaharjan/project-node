@@ -41,6 +41,7 @@ router.get('/:id', articleController.fetchById);
  * POST /api/users
  */
 router.post('/',upload.single('image'), function(req, res, next) {
+    req.body.image = req.file.filename;
     console.log(req.body);
     res.json({msg: "c"});
 });

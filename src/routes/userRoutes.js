@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 import * as userController from '../controllers/users';
 import { findUser, userValidator } from '../validators/userValidator';
+import * as verification from '../middlewares/verification';
 
 const router = Router();
 
@@ -29,5 +30,16 @@ router.put('/:id', findUser, userValidator, userController.update);
  * DELETE /api/users/:id
  */
 router.delete('/:id', findUser, userController.deleteUser);
+
+
+
+router
+  .route('/:id/articles')
+  .get(userController.fetchAllArticles);
+
+
+router
+  .route('/:id/articles/:articleId')
+  .get(userController.fetchArticle);
 
 export default router;

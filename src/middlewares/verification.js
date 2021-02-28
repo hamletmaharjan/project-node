@@ -1,0 +1,46 @@
+const jwt = require('jsonwebtoken');
+
+/**
+ * @param  {Object} req
+ * @param  {Object} res
+ * @param  {Function} next
+ */
+export function verifyToken(req, res, next) {
+  const token = req.headers.authorization;
+
+  // res.json(req.headers);
+  if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
+  jwt.verify(token, 'shh', function (err, decoded) {
+    req.body.role = decoded.role;
+    req.body.id = decoded.id;
+    if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+    next();
+  });
+}
+/**
+ * @param  {Object} req
+ * @param  {Object} res
+ * @param  {Function} next
+ */
+export function verifyAdmin(req, res, next) {
+  if (req.body.role === 'admin') {
+    next();
+  } else {
+    res.json({ message: 'not authorized' });
+  }
+}
+
+/**
+ * @param  {Object} req
+ * @param  {Object} res
+ * @param  {Function} next
+ */
+export function verifyUser(req, res, next) {
+  if (req.body.id == req.params.id) {
+    next();
+  } else {
+    res.json({ message: 'not authorized' });
+  }
+}
+
+// export default verifyToken;

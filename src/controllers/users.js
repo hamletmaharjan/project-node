@@ -71,3 +71,85 @@ export function deleteUser(req, res, next) {
     .then(data => res.status(HttpStatus.NO_CONTENT).json({ data }))
     .catch(err => next(err));
 }
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Fetch all articles for the user.
+ *
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ */
+export function fetchAllArticles(req, res, next) {
+  userService
+    .getArticles(req.params.id)
+    .then((data) => res.json({ data }))
+    .catch((err) => next(err));
+}
+
+/**
+ * Fetch article for the user.
+ *
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ */
+export function fetchArticle(req, res, next) {
+  userService
+    .getArticle(req.params.id, req.params.articleId)
+    .then((data) => res.json({ data }))
+    .catch((err) => next(err));
+}
+
+
+// /**
+//  * Create a new todo.
+//  *
+//  * @param {Object} req
+//  * @param {Object} res
+//  * @param {Function} next
+//  */
+// export function createTodo(req, res, next) {
+//   userService
+//     .createTodo(req.body.id,req.body)
+//     .then((data) => res.status(HttpStatus.CREATED).json({ data }))
+//     .catch((err) => next(err));
+// }
+
+// /**
+//  * Update a todo.
+//  *
+//  * @param {Object} req
+//  * @param {Object} res
+//  * @param {Function} next
+//  */
+// export function updateTodo(req, res, next) {
+//   userService
+//     .updateTodo(req.params.todoId, req.body)
+//     .then((data) => res.json({ data }))
+//     .catch((err) => next(err));
+// }
+
+// /**
+//  * Delete a todo.
+//  *
+//  * @param {Object} req
+//  * @param {Object} res
+//  * @param {Function} next
+//  */
+// export function deleteTodo(req, res, next) {
+//   userService
+//     .deleteTodo(req.params.todoId)
+//     .then((data) => res.status(HttpStatus.NO_CONTENT).json({ data }))
+//     .catch((err) => next(err));
+// }
+

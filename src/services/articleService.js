@@ -39,13 +39,16 @@ export function getArticle(id) {
 }
 
 // /**
-//  * Create new todo.
+//  * Create new article.
 //  *
-//  * @param   {Object}  todo
+//  * @param   {Object}  article
 //  * @returns {Promise}
 //  */
-// export function createTodo(todo) {
-//   return new Todo({ title: todo.title, user_id: todo.user_id, completed: todo.completed }).save();
+// export function createTodo(article) {
+//   return new Article({ 
+//       title: article.title, 
+//       user_id: article.user_id, 
+//     }).save();
 // }
 
 // /**
