@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 import swaggerSpec from './utils/swagger';
 import userRoutes from './routes/userRoutes';
+import authRoutes from './routes/authRoutes';
 
 /**
  * Contains all API routes for the application.
@@ -25,6 +26,7 @@ router.get('/', (req, res) => {
   });
 });
 
+router.use('/auth', authRoutes);
 router.use('/users', userRoutes);
 
 export default router;

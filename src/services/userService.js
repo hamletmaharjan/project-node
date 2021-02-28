@@ -33,7 +33,7 @@ export function getUser(id) {
  * @returns {Promise}
  */
 export function createUser(user) {
-  return new User({ name: user.name }).save();
+  return new User(user).save();
 }
 
 /**
