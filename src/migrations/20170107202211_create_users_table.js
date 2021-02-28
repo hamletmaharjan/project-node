@@ -4,15 +4,15 @@
  * @param   {object} knex
  * @returns {Promise}
  */
-export function up(knex) {
+function up(knex) {
   return knex.schema.createTable('users', table => {
-    table.increments();
-    table
-      .timestamp('created_at')
-      .notNull()
-      .defaultTo(knex.raw('now()'));
-    table.timestamp('updated_at').notNull();
-    table.string('name').notNull();
+    table.increments().primary();
+    table.string('username');
+    table.string('name');
+    table.string('email');
+    table.string('password');
+    table.enu('role', ['admin', 'user']).defaultTo('user');
+    table.timestamps();
   });
 }
 
@@ -22,6 +22,8 @@ export function up(knex) {
  * @param   {object} knex
  * @returns {Promise}
  */
-export function down(knex) {
+function down(knex) {
   return knex.schema.dropTable('users');
 }
+
+module.exports = { up, down };
