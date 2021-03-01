@@ -31,10 +31,10 @@ export function login(req, res, next) {
         infos.role = result.role;
         const token = jwt.sign(infos, 'shh');
 
-        res.json({ token: token });
+        res.json({id:result.id,  token: token , name: result.name, username: result.username, auth: true});
         // res.json(data );
       } else {
-        res.json({ msg: 'wrong' });
+        res.status(401).json({ message: 'Incorrect email or password' , auth:false });
       }
     })
     .catch((err) => next(err));

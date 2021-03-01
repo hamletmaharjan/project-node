@@ -31,7 +31,7 @@ export function verifyAdmin(req, res, next) {
   if (req.user.role === 'admin') {
     next();
   } else {
-    res.json({ message: 'not authorized' });
+    res.status(401).json({ message: 'Not authorized' });
   }
 }
 
@@ -44,7 +44,7 @@ export function verifyUser(req, res, next) {
   if (req.user.id == req.params.id) {
     next();
   } else {
-    res.json({ message: 'not authorized' });
+    res.status(401).json({ message: 'Not authorized' });
   }
 }
 
