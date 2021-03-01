@@ -57,6 +57,8 @@ router
 
 router
   .route('/:id/articles/:articleId')
-  .get(userController.fetchArticle);
+  .get(userController.fetchArticle)
+  .put(verification.verifyUser, upload.single('image'), userController.updateArticle)
+  .delete(verification.verifyUser, userController.deleteArticle);
 
 export default router;

@@ -128,31 +128,35 @@ export function createArticle(req, res, next) {
     .catch((err) => next(err));
 }
 
-// /**
-//  * Update a todo.
-//  *
-//  * @param {Object} req
-//  * @param {Object} res
-//  * @param {Function} next
-//  */
-// export function updateTodo(req, res, next) {
-//   userService
-//     .updateTodo(req.params.todoId, req.body)
-//     .then((data) => res.json({ data }))
-//     .catch((err) => next(err));
-// }
+/**
+ * Update an article.
+ *
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ */
+export function updateArticle(req, res, next) {
+  req.body.image = req.file.filename;
+  userService
+    .updateArticle(req.params.articleId, req.body)
+    .then((data) => res.json({ data }))
+    .catch((err) => next(err));
+}
 
-// /**
-//  * Delete a todo.
-//  *
-//  * @param {Object} req
-//  * @param {Object} res
-//  * @param {Function} next
-//  */
-// export function deleteTodo(req, res, next) {
-//   userService
-//     .deleteTodo(req.params.todoId)
-//     .then((data) => res.status(HttpStatus.NO_CONTENT).json({ data }))
-//     .catch((err) => next(err));
-// }
+/**
+ * Delete an article.
+ *
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ */
+export function deleteArticle(req, res, next) {
+  userService
+    .deleteArticle(req.params.articleId)
+    .then((data) => {
+      console.log(data);
+      res.json({ data: "success"});
+    })
+    .catch((err) => next(err));
+}
 

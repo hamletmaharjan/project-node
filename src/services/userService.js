@@ -128,23 +128,23 @@ export function createArticle(userId, article) {
 
 
 
-// /**
-//  * Update a todo.
-//  *
-//  * @param   {Number|String}  id
-//  * @param   {Object}         todo
-//  * @returns {Promise}
-//  */
-// export function updateTodo(id, todo) {
-//   return new Todo({ id }).save({ title: todo.title, completed: todo.completed });
-// }
+/**
+ * Update an article.
+ *
+ * @param   {Number|String}  id
+ * @param   {Object}         article
+ * @returns {Promise}
+ */
+export function updateArticle(id, article) {
+  return new Article({ id }).save({ title: article.title, description: article.description, image:article.image });
+}
 
-// /**
-//  * Delete a todo.
-//  *
-//  * @param   {Number|String}  id
-//  * @returns {Promise}
-//  */
-// export function deleteTodo(id) {
-//   return new Todo({ id }).fetch().then((todo) => todo.destroy());
-// }
+/**
+ * Delete an article.
+ *
+ * @param   {Number|String}  id
+ * @returns {Promise}
+ */
+export function deleteArticle(id) {
+  return new Article({ id }).fetch().then((article) => article.destroy());
+}
